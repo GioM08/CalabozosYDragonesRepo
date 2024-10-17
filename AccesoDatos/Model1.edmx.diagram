@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="eb89106129ac4421871b42c0a6d71c84" Name="Diagram1">
+        <EntityTypeShape EntityType="CalabozosDragonesModel.Amigo" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CalabozosDragonesModel.Cuenta" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CalabozosDragonesModel.ListaAmigos" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CalabozosDragonesModel.RecursoFoto" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CalabozosDragonesModel.Sala" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <AssociationConnector Association="CalabozosDragonesModel.FK__ListaAmig__idAmi__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="CalabozosDragonesModel.FK__Cuenta__idFoto__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="CalabozosDragonesModel.FK__Cuenta__idSala__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="CalabozosDragonesModel.FK__ListaAmig__idCue__5441852A" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

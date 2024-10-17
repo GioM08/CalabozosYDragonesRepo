@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CalabozosDragonesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Amigo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="apoco" Type="varchar" MaxLength="16" />
+          <Property Name="rolJugado" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Cuenta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="apodo" Type="varchar" MaxLength="16" />
+          <Property Name="correo" Type="varchar" MaxLength="80" />
+          <Property Name="contrasena" Type="varchar" MaxLength="50" />
+          <Property Name="idFoto" Type="int" />
+          <Property Name="idSala" Type="int" />
+        </EntityType>
+        <EntityType Name="ListaAmigos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCuenta" Type="int" />
+          <Property Name="idAmigo" Type="int" />
+        </EntityType>
+        <EntityType Name="RecursoFoto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ruta" Type="varchar" MaxLength="255" />
+          <Property Name="descripcion" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Sala">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="jugadores" Type="int" />
+        </EntityType>
+        <Association Name="FK__Cuenta__idFoto__4E88ABD4">
+          <End Role="RecursoFoto" Type="Self.RecursoFoto" Multiplicity="0..1" />
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecursoFoto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cuenta">
+              <PropertyRef Name="idFoto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cuenta__idSala__4F7CD00D">
+          <End Role="Sala" Type="Self.Sala" Multiplicity="0..1" />
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sala">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cuenta">
+              <PropertyRef Name="idSala" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ListaAmig__idAmi__5535A963">
+          <End Role="Amigo" Type="Self.Amigo" Multiplicity="0..1" />
+          <End Role="ListaAmigos" Type="Self.ListaAmigos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Amigo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ListaAmigos">
+              <PropertyRef Name="idAmigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ListaAmig__idCue__5441852A">
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="0..1" />
+          <End Role="ListaAmigos" Type="Self.ListaAmigos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ListaAmigos">
+              <PropertyRef Name="idCuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CalabozosDragonesModelStoreContainer">
+          <EntitySet Name="Amigo" EntityType="Self.Amigo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cuenta" EntityType="Self.Cuenta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListaAmigos" EntityType="Self.ListaAmigos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecursoFoto" EntityType="Self.RecursoFoto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sala" EntityType="Self.Sala" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Cuenta__idFoto__4E88ABD4" Association="Self.FK__Cuenta__idFoto__4E88ABD4">
+            <End Role="RecursoFoto" EntitySet="RecursoFoto" />
+            <End Role="Cuenta" EntitySet="Cuenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cuenta__idSala__4F7CD00D" Association="Self.FK__Cuenta__idSala__4F7CD00D">
+            <End Role="Sala" EntitySet="Sala" />
+            <End Role="Cuenta" EntitySet="Cuenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ListaAmig__idAmi__5535A963" Association="Self.FK__ListaAmig__idAmi__5535A963">
+            <End Role="Amigo" EntitySet="Amigo" />
+            <End Role="ListaAmigos" EntitySet="ListaAmigos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ListaAmig__idCue__5441852A" Association="Self.FK__ListaAmig__idCue__5441852A">
+            <End Role="Cuenta" EntitySet="Cuenta" />
+            <End Role="ListaAmigos" EntitySet="ListaAmigos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CalabozosDragonesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Amigo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="apoco" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="rolJugado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ListaAmigos" Relationship="Self.FK__ListaAmig__idAmi__5535A963" FromRole="Amigo" ToRole="ListaAmigos" />
+        </EntityType>
+        <EntityType Name="Cuenta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="apodo" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="correo" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idFoto" Type="Int32" />
+          <Property Name="idSala" Type="Int32" />
+          <NavigationProperty Name="RecursoFoto" Relationship="Self.FK__Cuenta__idFoto__4E88ABD4" FromRole="Cuenta" ToRole="RecursoFoto" />
+          <NavigationProperty Name="Sala" Relationship="Self.FK__Cuenta__idSala__4F7CD00D" FromRole="Cuenta" ToRole="Sala" />
+          <NavigationProperty Name="ListaAmigos" Relationship="Self.FK__ListaAmig__idCue__5441852A" FromRole="Cuenta" ToRole="ListaAmigos" />
+        </EntityType>
+        <EntityType Name="ListaAmigos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCuenta" Type="Int32" />
+          <Property Name="idAmigo" Type="Int32" />
+          <NavigationProperty Name="Amigo" Relationship="Self.FK__ListaAmig__idAmi__5535A963" FromRole="ListaAmigos" ToRole="Amigo" />
+          <NavigationProperty Name="Cuenta" Relationship="Self.FK__ListaAmig__idCue__5441852A" FromRole="ListaAmigos" ToRole="Cuenta" />
+        </EntityType>
+        <EntityType Name="RecursoFoto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ruta" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cuenta" Relationship="Self.FK__Cuenta__idFoto__4E88ABD4" FromRole="RecursoFoto" ToRole="Cuenta" />
+        </EntityType>
+        <EntityType Name="Sala">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="jugadores" Type="Int32" />
+          <NavigationProperty Name="Cuenta" Relationship="Self.FK__Cuenta__idSala__4F7CD00D" FromRole="Sala" ToRole="Cuenta" />
+        </EntityType>
+        <Association Name="FK__ListaAmig__idAmi__5535A963">
+          <End Role="Amigo" Type="Self.Amigo" Multiplicity="0..1" />
+          <End Role="ListaAmigos" Type="Self.ListaAmigos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Amigo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ListaAmigos">
+              <PropertyRef Name="idAmigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cuenta__idFoto__4E88ABD4">
+          <End Role="RecursoFoto" Type="Self.RecursoFoto" Multiplicity="0..1" />
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecursoFoto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cuenta">
+              <PropertyRef Name="idFoto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cuenta__idSala__4F7CD00D">
+          <End Role="Sala" Type="Self.Sala" Multiplicity="0..1" />
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sala">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cuenta">
+              <PropertyRef Name="idSala" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ListaAmig__idCue__5441852A">
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="0..1" />
+          <End Role="ListaAmigos" Type="Self.ListaAmigos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ListaAmigos">
+              <PropertyRef Name="idCuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CalabozosDragonesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Amigo" EntityType="Self.Amigo" />
+          <EntitySet Name="Cuenta" EntityType="Self.Cuenta" />
+          <EntitySet Name="ListaAmigos" EntityType="Self.ListaAmigos" />
+          <EntitySet Name="RecursoFoto" EntityType="Self.RecursoFoto" />
+          <EntitySet Name="Sala" EntityType="Self.Sala" />
+          <AssociationSet Name="FK__ListaAmig__idAmi__5535A963" Association="Self.FK__ListaAmig__idAmi__5535A963">
+            <End Role="Amigo" EntitySet="Amigo" />
+            <End Role="ListaAmigos" EntitySet="ListaAmigos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cuenta__idFoto__4E88ABD4" Association="Self.FK__Cuenta__idFoto__4E88ABD4">
+            <End Role="RecursoFoto" EntitySet="RecursoFoto" />
+            <End Role="Cuenta" EntitySet="Cuenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cuenta__idSala__4F7CD00D" Association="Self.FK__Cuenta__idSala__4F7CD00D">
+            <End Role="Sala" EntitySet="Sala" />
+            <End Role="Cuenta" EntitySet="Cuenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ListaAmig__idCue__5441852A" Association="Self.FK__ListaAmig__idCue__5441852A">
+            <End Role="Cuenta" EntitySet="Cuenta" />
+            <End Role="ListaAmigos" EntitySet="ListaAmigos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CalabozosDragonesModelStoreContainer" CdmEntityContainer="CalabozosDragonesEntities">
+          <EntitySetMapping Name="Amigo">
+            <EntityTypeMapping TypeName="CalabozosDragonesModel.Amigo">
+              <MappingFragment StoreEntitySet="Amigo">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="apoco" ColumnName="apoco" />
+                <ScalarProperty Name="rolJugado" ColumnName="rolJugado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cuenta">
+            <EntityTypeMapping TypeName="CalabozosDragonesModel.Cuenta">
+              <MappingFragment StoreEntitySet="Cuenta">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="apodo" ColumnName="apodo" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+                <ScalarProperty Name="idFoto" ColumnName="idFoto" />
+                <ScalarProperty Name="idSala" ColumnName="idSala" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListaAmigos">
+            <EntityTypeMapping TypeName="CalabozosDragonesModel.ListaAmigos">
+              <MappingFragment StoreEntitySet="ListaAmigos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
+                <ScalarProperty Name="idAmigo" ColumnName="idAmigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecursoFoto">
+            <EntityTypeMapping TypeName="CalabozosDragonesModel.RecursoFoto">
+              <MappingFragment StoreEntitySet="RecursoFoto">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ruta" ColumnName="ruta" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sala">
+            <EntityTypeMapping TypeName="CalabozosDragonesModel.Sala">
+              <MappingFragment StoreEntitySet="Sala">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="jugadores" ColumnName="jugadores" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
