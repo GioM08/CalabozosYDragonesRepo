@@ -10,15 +10,17 @@ using System.Text;
 namespace ServiciosCalabozosDragones
 {
 
-    public class ImplementacionServicio : ICrearCuenta
+    public partial class ImplementacionServicio : IGestionCuenta
     {
 
         public bool AgregarCuenta(Cuenta cuenta)
         {
 
             return (new DaoCuenta().RegistrarCuenta(cuenta.Apodo, cuenta.Contrasena, cuenta.Correo));
-                
+
         }
 
     }
+   
+
 }
