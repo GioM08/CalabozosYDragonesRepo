@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure.Interception;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -12,13 +13,16 @@ namespace ServiciosCalabozosDragones
     public interface ICrearCuenta
     {
         [OperationContract]
-        void AgregarCuenta(Cuenta cuenta);
+        bool AgregarCuenta(Cuenta cuenta);
 
 
     }
     [DataContract]
     public class Cuenta
     { 
+        private String apodo;
+        private String correo;
+        private String contrasena;
       
         [DataMember]
         public string Apodo { get; set; }

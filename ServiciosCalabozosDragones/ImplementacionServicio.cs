@@ -1,5 +1,7 @@
-﻿using System;
+﻿using AccesoDatos;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -7,15 +9,16 @@ using System.Text;
 
 namespace ServiciosCalabozosDragones
 {
-    // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de clase "Service1" en el código y en el archivo de configuración a la vez.
+
     public class ImplementacionServicio : ICrearCuenta
     {
-        public void AgregarCuenta(Cuenta cuenta)
+
+        public bool AgregarCuenta(Cuenta cuenta)
         {
-            Console.WriteLine("Usuario añadido" + cuenta.Apodo);
+
+            return (new DaoCuenta().RegistrarCuenta(cuenta.Apodo, cuenta.Contrasena, cuenta.Correo));
+                
         }
 
-        
-        
     }
 }
