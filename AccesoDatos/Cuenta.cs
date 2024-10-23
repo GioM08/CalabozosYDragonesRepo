@@ -23,6 +23,7 @@ namespace AccesoDatos
         public string apodo { get; set; }
         public string correo { get; set; }
         public string contrasena { get; set; }
+        public string nombre { get; set; }
         public Nullable<int> idFoto { get; set; }
         public Nullable<int> idSala { get; set; }
     

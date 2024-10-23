@@ -8,16 +8,16 @@ using System.ServiceModel;
 
 namespace AccesoDatos
 {
-    public class DaoCuenta
+    public class DaoRegistrarCuenta
     {
-        public bool RegistrarCuenta(string apodo, string contrasena, string correo)
+        public bool RegistrarCuenta(string apodo, string contrasena, string correo, string nombre)
         {
             using (var context = new CalabozosDragonesEntities())
             {
-                // Verificar si el correo ya está registrado
-                if (context.Cuenta.Any(c => c.correo == correo))
+                // Verificar apodo y correo
+                if (VerificarCorreo(correo) || VerificarApodo(apodo))
                 {
-                    return false;  // Correo ya existe
+                    return false;  // Correo o apodo ya existen
                 }
                 else
                 {
@@ -26,7 +26,8 @@ namespace AccesoDatos
                     {
                         apodo = apodo,
                         contrasena = contrasena,
-                        correo = correo
+                        correo = correo,
+                        nombre = nombre
                     };
 
                     context.Cuenta.Add(nuevaCuenta);
@@ -36,7 +37,7 @@ namespace AccesoDatos
             }
         }
 
-        public bool VerificarCuenta(string correo)
+        public bool VerificarCorreo(string correo)
         {
             using (var context = new CalabozosDragonesEntities())
             {
@@ -44,6 +45,22 @@ namespace AccesoDatos
                 if (context.Cuenta.Any(c => c.correo == correo))
                 {
                     return true;  // Correo ya existe
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+        }
+        public bool VerificarApodo(string apodo)
+        {
+            using (var context = new CalabozosDragonesEntities())
+            {
+
+                if (context.Cuenta.Any(c => c.apodo == apodo))
+                {
+                    return true;  // apodo ya existe
                 }
                 else
                 {

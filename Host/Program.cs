@@ -15,7 +15,7 @@ namespace Host
             {
 
                 host.Open();
-                Console.WriteLine("Server is running");
+                Console.WriteLine("Servidor Corriendo");
                 Console.ReadLine();
             }
         }
