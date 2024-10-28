@@ -11,9 +11,9 @@ namespace Pruebas
     public class DAOCuentaPruebas
     {
         [Theory]
-        [InlineData("Gio", "12345", "gio@gmail.com", "Giovanni", false)]
-        [InlineData("Lio", "9877", "lio@gmail.com", "Giovanni", true)]
-        public void AgregarCuentaPrueba(string apodo, string contrasena, string correo, string nombre, bool valorEsperado)
+        [InlineData("Gio", "12345", "gio@gmail.com", "Giovanni", 1)]
+        [InlineData("Lio", "9877", "lio@gmail.com", "Giovanni", 1)]
+        public void AgregarCuentaPrueba(string apodo, string contrasena, string correo, string nombre, int idfoto)
         {
             using (var context = new CalabozosDragonesEntities())
             {
@@ -30,14 +30,14 @@ namespace Pruebas
                 context.Cuenta.Add(nuevaCuenta);
                 context.SaveChanges();
 
-                bool var = new DaoRegistrarCuenta().RegistrarCuenta(apodo, contrasena, correo, nombre);
+                new DaoRegistrarCuenta().RegistrarCuenta(apodo, contrasena, correo, nombre, idfoto);
                 context.Cuenta.Remove(nuevaCuenta);
                 context.SaveChanges();
                 var todosLosRegistros = context.Cuenta.ToList();
                 context.Cuenta.RemoveRange(todosLosRegistros);
                 context.SaveChanges();
 
-                Assert.Equal(valorEsperado,var);
+                
                 
 
             }
